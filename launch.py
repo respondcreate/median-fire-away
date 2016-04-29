@@ -41,8 +41,8 @@ def create_parser():
         help="The amount of /put requests you want to send."
     )
     parser.add_argument(
-        '-l',
-        '--limit',
+        '-u',
+        '--upper-limit',
         type=int,
         default=100000,
         help='The largest integer to send to /put (each number sent will be '
@@ -56,5 +56,5 @@ if __name__ == '__main__':
     # Arguments to set
     args = parser.parse_args()
     amount = args.amount
-    upper_limit = args.limit
+    upper_limit = args.upper_limit
     send_requests_to_median(amount, upper_limit)
