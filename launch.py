@@ -1,6 +1,7 @@
 """
 Send a bunch of requests to median-microservice.
 """
+from argparse import ArgumentParser
 from datetime import datetime
 from random import randrange
 from urllib import urlencode
@@ -16,7 +17,6 @@ def send_requests_to_median(amount, upper_limit):
     Args:
     amount (int): The amount of requests to send.
     upper_limit (int): The highest number you want to send to /put.
-    median_interval
     """
     for i in range(0, amount):
         this_int = randrange(1, upper_limit)
@@ -27,5 +27,34 @@ def send_requests_to_median(amount, upper_limit):
             print('{} - Sent: {}'.format(datetime.now(), this_int))
         del response
 
+
+def create_parser():
+    """Create a command line parser for this module."""
+    parser = ArgumentParser(
+        description='Send some requests to median-microservice.'
+    )
+    parser.add_argument(
+        '-a',
+        '--amount',
+        type=int,
+        default=2000,
+        help="The amount of /put requests you want to send."
+    )
+    parser.add_argument(
+        '-l',
+        '--limit',
+        type=int,
+        default=100000,
+        help='The largest integer to send to /put (each number sent will be '
+             'randomly chosen between 1 and this value).'
+    )
+    return parser
+
 if __name__ == '__main__':
-    send_requests_to_median(2000, 20000)
+    parser = create_parser()
+
+    # Arguments to set
+    args = parser.parse_args()
+    amount = args.amount
+    upper_limit = args.limit
+    send_requests_to_median(amount, upper_limit)
