@@ -21,12 +21,16 @@ $ cd median-fire-away/
 Using this script is super-easy:
 
 ```bash
-$ python launch.py
+$ python launch.py 0.0.0.0
 ```
 
 Running the above command will send 2000 random integers between 1 and 100,000 to the `median-microservice` /put endpoint. If you want to change the amount of requests or upper-limit range just use the command line options below.
 
 ### Command Line Options
+
+* `<host>`
+
+    A host or IP (sans 'http://') where the `median-microservice` you'd like to test can be reached.
 
 * `-a, --amount <amount>`
 
